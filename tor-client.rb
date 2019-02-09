@@ -1,28 +1,3 @@
-class Tor::HTTP
-  def self.post_body(uri_or_host, post_body = "", path = nil, port = nil)
-    res, host = "", nil
-      if path
-        host = uri_or_host
-      else
-        host = uri_or_host.host
-        port = uri_or_host.port
-        path = uri_or_host.request_uri
-      end
-
-      start_params = start_parameters(uri_or_host, host, port)
-      start_socks_proxy(start_params) do |http|
-        request = Net::HTTP::Post.new(path)
-        request.body = post_options
-        Tor.configuration.headers.each do |header, value|
-          request.delete(header)
-          request.add_field(header, value)
-        end
-        res = http.request(request)
-      end
-      res
-  end
-end
-
 class TorClient < TorControl::Controller
   def get(*args)
     if connected? then
