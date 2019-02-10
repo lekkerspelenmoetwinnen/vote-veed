@@ -2,7 +2,7 @@
 ## Requirements
 - Some knowledge of Ruby or programming is recommended, but not needed
 - It doesn't use much of your computers resources, you can just leave it running in the background
-- If you have a slow internet connection you might want to up timeout a bit (see later)
+- If you have a slow internet connection you might want to up timeout a bit (see below)
 ## Installation
 ### Windows (currently the only option)
 - Install ruby from https://rubyinstaller.org/
