@@ -1,4 +1,8 @@
 # vote-veed
+## Requirements
+- Some knowledge of Ruby or programming is recommended, but not needed
+- It doesn't use much of your computers resources, you can just leave it running in the background
+- If you have a slow internet connection you might want to up timeout a bit (see later)
 ## Installation
 ### Windows (currently the only option)
 - Install ruby from https://rubyinstaller.org/
@@ -14,7 +18,7 @@
 - Done! At the start you may see `... timed out!` a lot. If you want, you can type `timeout 150` to set the timeout to 150 seconds for a bit, then change it back to 70 when you see the votes coming in
 
 #### Commands:
-- `timeout <seconds>` change the timeout
+- `timeout <seconds>` change the timeout of each voting round (the maximum time it will wait for the voting to finish)
 - `safety <level>` change the safety_level, see below
 - `ip` show the ip of every thread before voting. Can be useful to turn on to make sure tor is working
 - `stop` or `exit` make a guess
