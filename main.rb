@@ -8,7 +8,12 @@ require_relative 'tor_requests/lib/tor_requests.rb'
 require_relative 'tor-client.rb'
 require_relative 'veed.rb'
 
-tor = TorClient.connect(:port => 9051)
+tor_thr = Thread.new {
+  IO.popen('tor-proxy\Tor\tor.exe -f tor-proxy\Tor\torrc')
+}
+
+tor = TorClient.connect(:port => 9051,:cookie => "LekkerSpelenMoetWinnen")
+tor.authenticate
 Veed.tor = tor
 # puts "Your computers own external address is #{tor.address} (should not be visible to Veed)"
 votes = 0
@@ -111,4 +116,5 @@ end
 elapsed = Time.now - start
 puts "Total votes: #{true_votes}/#{votes} in #{(elapsed/3600).to_i}:#{((elapsed%3600)/60).to_i}:#{((elapsed%3600)%60).to_i}"
 input_thr.exit
+tor_thr.exit
 tor.quit
