@@ -11,6 +11,7 @@
 
   ```gem install faker```
 - Clone or download this repo (and extract)
+- You can make changes if you want/can, especially look at `self.categories` in veed.rb, change the values to the ones you want to vote for (but don't you dare change the malle makkers)
 
 ## Usage
 - Open command prompt in the Veed folder
