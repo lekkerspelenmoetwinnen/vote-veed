@@ -1,23 +1,18 @@
 class TorClient < TorControl::Controller
-  def get(*args)
+  def get(http,*args)
     if connected? then
-      Tor::HTTP.get(*args)
+      http.get(*args)
     else
       "Error: Not connected to tor!"
     end
   end
 
-  def post(*args)
+  def post(http,*args)
     if connected? then
-      Tor::HTTP.post(*args)
+      http.post(*args)
     else
       "Error: Not connected to tor!"
     end
-  end
-
-  def signal(name)
-    send_command(:signal, name)
-    read_reply
   end
 
   # Gives a guess of current computer external address
@@ -30,8 +25,8 @@ class TorClient < TorControl::Controller
 
   # Current output node address
   # Powered by ipify.org
-  def public_address
-    get(URI("https://api.ipify.org/")).body
+  def public_address(http)
+    get(http,URI("https://api.ipify.org/")).body
   end
 
   # Current output node address

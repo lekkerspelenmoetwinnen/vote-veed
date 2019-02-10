@@ -1,3 +1,6 @@
 [submodule "tor_requests"]
 	path = tor_requests
 	url = https://github.com/lekkerspelenmoetwinnen/tor_requests.git
+[submodule "tor"]
+	path = tor
+	url = https://github.com/dryruby/tor.rb.git

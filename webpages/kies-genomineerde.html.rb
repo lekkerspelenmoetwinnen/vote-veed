@@ -1,0 +1,43 @@
+Veed.add_file "kies-genomineerde.html", %{<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+	<title>Kies de genomineerde</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link media="all" rel="stylesheet" href="/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-3.3.1.min.js" defer><\/script>')</script>
+	<script src="/js/jquery.main.js" defer></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59215967-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-59215967-4');
+</script>
+
+</head>
+<body>
+<div id="messages"></div><div id="warnings"></div><div id="errors"></div>
+	<div id="wrapper">
+		<div class="wrapper-holder">
+			<div class="container">
+				<form method="post" class="form-area">
+<input type="hidden" name="action" value="vote-nominees">
+					REGEXPHERE
+					<input type="submit" value="Stemmen">
+				</form>		<div class="copyright">
+			<a href="#">
+				<img src="/img/empty.png" alt="sponsor">
+			</a>
+		</div>
+			</div>
+</div>
+</div>
+</body>
+</html>}
