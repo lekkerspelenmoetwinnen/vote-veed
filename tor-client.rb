@@ -1,4 +1,10 @@
 class TorClient < TorControl::Controller
+  def initialize(*args)
+    super(*args)
+    authenticate
+    take_ownership
+  end
+
   def get(http,*args)
     if connected? then
       http.get(*args)
@@ -55,5 +61,14 @@ class TorClient < TorControl::Controller
   # response to this signal.)
   def new_session
     signal("NEWNYM")
+  end
+
+  def take_ownership
+    send_line('TAKEOWNERSHIP')
+    read_reply
+  end
+
+  def shutdown
+    signal('SHUTDOWN')
   end
 end

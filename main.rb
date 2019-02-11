@@ -8,12 +8,21 @@ require_relative 'tor_requests/lib/tor_requests.rb'
 require_relative 'tor-client.rb'
 require_relative 'veed.rb'
 
+tor_proxy = IO.popen('tor-proxy\Tor\tor.exe -f tor-proxy\Tor\torrc')
+tor_started = false
 tor_thr = Thread.new {
-  IO.popen('tor-proxy\Tor\tor.exe -f tor-proxy\Tor\torrc')
+  while true
+    if /[\w\.\: ]+\[(.+)\] (.*)/.match(tor_proxy.gets.chomp)
+      if !tor_started && /Bootstrapped 100\%\: Done/.match($2)
+        tor_started = true
+      end
+      puts "Tor (#{$1})#{$2}" if !$2.empty?
+    end
+  end
 }
+sleep 1 until tor_started
 
 tor = TorClient.connect(:port => 9051,:cookie => "LekkerSpelenMoetWinnen")
-tor.authenticate
 Veed.tor = tor
 # puts "Your computers own external address is #{tor.address} (should not be visible to Veed)"
 votes = 0
@@ -37,11 +46,26 @@ Veed.debug_save = true
 
 Veed.open
 
+def quit(tor,tor_proxy)
+  begin
+    puts "Exiting..."
+    Timeout.timeout(10) {
+      tor.shutdown
+    }
+  rescue Exception => e
+    puts e.message
+    puts e.backtrace.inspect
+    Process.kill("INT",tor_proxy.pid)
+    tor_proxy.close
+  end
+  Thread.main.exit
+end
+
 input_thr = Thread.new {
   while(true)
     case gets.chomp
     when "exit","stop"
-      Thread.main.exit if stop
+      quit(tor,tor_proxy) if stop
       stop = true
       puts "Stopping after current vote. Type exit or stop again to shutdown immediately"
     when "ip","address","addresses"
@@ -94,7 +118,7 @@ while(true)
           end
         rescue Exception => e
           puts e.message
-          #puts e.backtrace.inspect
+          puts e.backtrace.inspect
           raise e
         end
       }
@@ -117,4 +141,5 @@ elapsed = Time.now - start
 puts "Total votes: #{true_votes}/#{votes} in #{(elapsed/3600).to_i}:#{((elapsed%3600)/60).to_i}:#{((elapsed%3600)%60).to_i}"
 input_thr.exit
 tor_thr.exit
-tor.quit
+puts "Shuttin down Tor..."
+quit(tor,tor_proxy)
