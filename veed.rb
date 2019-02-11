@@ -99,21 +99,24 @@ module Veed
     rand(Date.civil(1994,1,1)..Date.civil(2007,12,31))
   end
 
+  # On who to vote for which category
+  # Array means: select random
   def self.categories
+    # WIP: Vul de andere categoriën nog in. 7483 is het id van de malse mannen
     if safety_level > 1 then
       {
-        "1" => "2154", # Beste mannelijke Youtuber
-        "2" => ["46","11","44","139","5378"], # Beste vrouwelijke Youtuber
-        "3" => ["137","2264","216","5378","38"], # Beste muziek Youtuber
-        "4" => "2154", # Beste Youtube Kanaal
+        "1" => "2154", # Beste mannelijke Youtuber, de heer, voor die bondgenootschap
+        "2" => ["46","11","44","139","5378"], # Beste vrouwelijke Youtuber, alle mogelijkheden, op volgorde van boven naar beneden
+        "3" => ["137","2264","216","5378","38"], # Beste muziek Youtuber, idem
+        "4" => "2154", # Beste Youtube Kanaal, de heer, voor die bondgenootschap
         # "6" => # Beste Comedy Youtuber
         # "7" => # Beste vlogger
         "8" => ["258","119","121","163","4192"], # Beste Nieuwkomer
-        "9" => "4994",# Beste Youtube Video
-        # "10" => # Beste Youtube Serie
-        "11" => "7483", # Beste Gaming Youtuber
+        "9" => "4994",# Beste Youtube Video, Tim bolleboos
+        "10" => ["299","1209"],# Beste Youtube Serie, [de kluis, fortnite jachtseizoen]
+        "11" => "7483", # Beste Gaming Youtuber, die malle makkers
         # "12" => # Beste Beauty Youtuber
-        "13" => "7483", # Beste Twitcher
+        "13" => "7483", # Beste Twitcher, die gekke jongens
         # "14" => # Beste Instagrammer
       }
     else
